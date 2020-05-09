@@ -6,7 +6,10 @@
 		<div class="row">
   			<div class="col-xs-3">
 				<%= render 'users/profile', user: @user %>
-			
+<!-- 個人チャット用 -->
+				<% unless @user.id == current_user.id %>
+                  <%= link_to "チャットルーム",chat_path(@user.id),class: "btn btn-info" %>
+                <% end %>
 <!--同コントローラーのviewで表示ならusersは省略可 -->
 
 				<h2>New book</h2>

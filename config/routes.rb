@@ -26,5 +26,9 @@ Rails.application.routes.draw do
   get  'serche_user' => 'searches#new',  as: 'search_user'
 
   get 'maps/index'
+
+  # 個人チャット用
+resources :chats, only: [:create,:show]
+#resources :rooms, only: [:create,:show]
 end
 

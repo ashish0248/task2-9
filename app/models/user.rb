@@ -13,11 +13,16 @@ class User < ApplicationRecord
   validates :name, length: {maximum: 20, minimum: 2}
   	validates :introduction,    length: { maximum: 50} 
 
- #以下　フォロー機能
+ #　フォロー用
   has_many :relationships
   has_many :followings, through: :relationships, source: :follow
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverse_of_relationships, source: :user
+
+  # 個人チャット用
+  has_many :user_rooms
+  has_many :chats
+  has_many :rooms, through: :user_rooms
 
   def follow(other_user)
   unless self == other_user
@@ -59,6 +64,7 @@ class User < ApplicationRecord
   def prefecture_name=(prefecture_name)
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
+
 
 end
 
